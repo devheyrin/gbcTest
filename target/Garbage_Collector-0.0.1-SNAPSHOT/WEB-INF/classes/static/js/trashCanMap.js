@@ -1,12 +1,12 @@
  $(document).ready(function(){
   	
   		// index.html <div id='body'>에 맵이 들어갈 <div> 추가
-  		var mapDiv = '<div id="map" style="width: 100%; height: 800px;"></div>';
+  		var mapDiv = '<div id="map" style="width: 100%; height: 900px;"></div>';
   		$('#body').html(mapDiv);
   		
   		// 맵 <div>에 맵을 표시 
 	 	var map = new naver.maps.Map(document.getElementById('map'), {
-			    zoom: 13,
+			    zoom: 16,
 			    mapTypeId: 'normal',
 			    zoomControl: true,
         		zoomControlOptions: {
@@ -35,6 +35,33 @@
 	    	alert("geolocation을 지원하지 않음");
 	        
 	    }*/
+	    
+	    // 클러스터 로고 관련 설정(이미지, 크기 등)
+	    var htmlMarker1 = {
+	        content: '<div style="cursor:pointer;width:40px;height:40px;line-height:42px;font-size:12px;color:white;text-align:center;font-weight:bold;background:url(../img/cluster-marker-1.png);background-size:contain;"></div>',
+	        size: N.Size(60, 60),
+	        anchor: N.Point(20, 20)
+	    },
+	    htmlMarker2 = {
+	        content: '<div style="cursor:pointer;width:40px;height:40px;line-height:42px;font-size:12px;color:white;text-align:center;font-weight:bold;background:url(../img/cluster-marker-2.png);background-size:contain;"></div>',
+	        size: N.Size(60, 60),
+	        anchor: N.Point(20, 20)
+	    },
+	    htmlMarker3 = {
+	        content: '<div style="cursor:pointer;width:40px;height:40px;line-height:42px;font-size:12px;color:white;text-align:center;font-weight:bold;background:url(../img/cluster-marker-3.png);background-size:contain;"></div>',
+	        size: N.Size(60, 60),
+	        anchor: N.Point(20, 20)
+	    },
+	    htmlMarker4 = {
+	        content: '<div style="cursor:pointer;width:40px;height:40px;line-height:42px;font-size:12px;color:white;text-align:center;font-weight:bold;background:url(../img/cluster-marker-4.png);background-size:contain;"></div>',
+	        size: N.Size(60, 60),
+	        anchor: N.Point(20, 20)
+	    },
+	    htmlMarker5 = {
+	        content: '<div style="cursor:pointer;width:40px;height:40px;line-height:42px;font-size:12px;color:white;text-align:center;font-weight:bold;background:url(../img/cluster-marker-5.png);background-size:contain;"></div>',
+	        size: N.Size(60, 60),
+	        anchor: N.Point(20, 20)
+	    };
 	    
 	    // 서버로 쓰레기통 위치 데이터 요청을 하고, 
 	    // 이를 받아 latlngs 배열에 위도와 경도를 추가,
@@ -103,7 +130,7 @@
 						};
 					};
 					
-					// 맵 전체에 화면 움직임이 멈출 때마다(사용자가 맵을 만지지 않는 상태가 되면) 보이는 화면에 marker를 띄우는 이벤트를 단다
+					/*// 맵 전체에 화면 움직임이 멈출 때마다(사용자가 맵을 만지지 않는 상태가 되면) 보이는 화면에 marker를 띄우는 이벤트를 단다
 					naver.maps.Event.addListener(map, 'idle', function(){
 						updatemarkers(map, markers);
 					});
@@ -142,7 +169,25 @@
 						} else {
 							marker.setMap(null);
 						};
-					};
+					};*/
   		});
+  		
+  		// 클러스터를 맵 위에 표시
+  		// 이미 가지고 있는 markers의 marker에 대하여 적용
+  		// 10, 100, 200, 500, 1000을 기준으로 클러스터 로고를 다르게 사용
+  		var markerClustering = new MarkerClustering({
+	        minClusterSize: 2,
+	        maxZoom: 17,
+	        map: map,
+	        markers: markers,
+	        disableClickZoom: false,
+	        gridSize: 150,
+	        icons: [htmlMarker1, htmlMarker2, htmlMarker3, htmlMarker4, htmlMarker5],
+	        indexGenerator: [10, 100, 200, 500, 1000],
+	        averageCenter: true,
+	        stylingFunction: function(clusterMarker, count) {
+	            $(clusterMarker.getElement()).find('div:first-child').text(count);
+	        }
+	    });
 	
  });
