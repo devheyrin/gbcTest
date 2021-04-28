@@ -1,0 +1,72 @@
+@font-face {
+      src : url("../fonts/BMJUA_ttf.ttf");
+      font-family: "jua" 
+}
+
+ 
+
+* {
+    font-family: "jua";
+}
+h1, h3, h5{
+	text-align: center;
+}
+
+.navbar-brand img{
+	width: 25px;
+	height: 25px;
+}
+
+
+.bg-back{
+	background-color: #0F8A12;
+}
+
+.navbar-light .navbar-brand {
+   color: white;
+   font-size: 20px;
+   font-weight: bold;
+}
+
+.text-left {
+  float:left;
+}
+  
+.container-fluid{ 
+	background-color: #0F8A12; 
+}
+
+.navcolor{
+	padding-top: 10px;
+	box-sizing: 10px;
+	margin-top: 15px;
+	padding-bottom: 0px;
+	margin-left: 12px;
+}
+
+#navbarSupportedContent{
+	color: white;
+}
+
+
+#dm_img{
+	text-align: center;
+}
+
+
+#notice{
+	background-color: #E8EBE8;
+	font-size: 12px;
+}
+
+#searchBtn{
+	background-color: #FFFFFF;
+}
+
+#searchBtn:hover{
+	color: #000000;
+}
+
+#searchWaste{
+	text-align: center;
+}
